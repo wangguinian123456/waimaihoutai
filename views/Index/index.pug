@@ -1,0 +1,47 @@
+extends ../common/common
+
+block admin 
+  .box#main(style='width:100ppx ;height:600px;border:1px solid black;')
+  input(type="hidden" id="arrData" value=`${arr}`)
+  script.
+    let arr=document.getElementById('arrData').value
+   
+    const myEcharts = echarts.init(document.getElementById('main'))
+    let option = {
+      title: {
+        text: '书店系统后台数据'
+      },
+      tooltip: {},
+      legend: {
+        show: true,
+        data: ['数量'],
+        left: 'right'
+      },
+      xAxis: {
+         type: 'category',
+         data: ['管理员', '会员', '商家', '图书', '订单']
+      },
+      yAxis: {
+        type: 'value'
+        //- data:[5,10,15,20,25,30]
+      },
+      series: [
+        {
+          color :'white',
+          name: '数量', 
+          type: 'bar', 
+          data:  arr.split(','),
+          colorBy:'series',
+          showBackground:true,
+          backgroundStyle: {
+            color: 'green'
+          },
+          label:{ 
+            show:true,
+            color:'#000',
+            position:'top'
+          },       
+        }
+      ],
+    }
+    myEcharts.setOption(option)
